@@ -4,7 +4,7 @@
 
 # AIM:
 
-# To write a C program to implement the rail fence transposition technique.
+To write a C program to implement the rail fence transposition technique.
 
 # DESCRIPTION:
 
@@ -18,8 +18,62 @@ STEP-3: Now read the keyword depending on the number of columns of the plain tex
 STEP-4: Arrange the characters of the keyword in sorted order and the corresponding columns of the plain text.
 STEP-5: Read the characters row wise or column wise in the former order to get the cipher text.
 
-# PROGRAM
+# PROGRAM:
+```
+#include <stdio.h>
+#include <string.h>
 
-# OUTPUT
+int main()
+{
+    char text[100], rail[10][100];
+    int i, j, k, row = 0, dir = 1;
+    int len, rails;
 
-# RESULT
+    printf("Enter the plaintext: ");
+    scanf("%s", text);
+
+    printf("Enter the number of rails: ");
+    scanf("%d", &rails);
+
+    len = strlen(text);
+
+    for(i = 0; i < rails; i++)
+        for(j = 0; j < len; j++)
+            rail[i][j] = '\0';
+
+    for(i = 0; i < len; i++)
+    {
+        rail[row][i] = text[i];
+
+        if(row == rails - 1)
+            dir = -1;
+        else if(row == 0)
+            dir = 1;
+
+        row += dir;
+    }
+
+    printf("Ciphertext: ");
+
+    for(i = 0; i < rails; i++)
+    {
+        for(j = 0; j < len; j++)
+        {
+            if(rail[i][j] != '\0')
+                printf("%c", rail[i][j]);
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}
+```
+
+# OUTPUT:
+
+<img width="1919" height="840" alt="Screenshot 2026-11-03 193458" src="https://github.com/user-attachments/assets/2cb62416-8eb4-40fb-a78e-b80d8f33b6cc" />
+
+
+# RESULT:
+Thus, the C program to implement the Rail Fence Transposition Technique was successfully executed, and the ciphertext was obtained.
